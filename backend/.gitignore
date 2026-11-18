@@ -1,0 +1,31 @@
+
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+
+# Python virtual environments
+venv/
+.venv/
+env/
+
+# Python cache
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Local development files
+instance/
+*.log
+.pytest_cache/
+.mypy_cache/
+
+# Local uploaded files
+uploads/
+
+# Operating system files
+.DS_Store
+Thumbs.db
+
+# Temporary VS Code files
+tempCodeRunnerFile.py
