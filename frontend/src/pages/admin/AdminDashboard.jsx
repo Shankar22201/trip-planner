@@ -3,7 +3,7 @@
 
 
 import AdminLayout from "../../components/AdminLayout";
-import welcomeFeature from "../../assets/time to travel.jfif"; // Image to show instead of paragraph
+import welcomeFeature from "../../assets/Time to travel.jfif"; // Image to show instead of paragraph
 
 export default function AdminDashboard() {
   return (
