@@ -1,10 +1,17 @@
 
 /* =========================================================
-   TRIP PLANNER - USER SIDE RESPONSIVE DESIGN
-   Covers: Dashboard, Trips, Bookings, Payments and Profile
+   TRIP PLANNER - USER RESPONSIVE DESIGN
+   Mobile-first card experience
+   Covers: Dashboard, Trips, Bookings, Payments,
+   Profile and Trip Details
+
+   Admin pages are NOT affected.
    ========================================================= */
 
-/* ---------- GLOBAL USER PAGE SETTINGS ---------- */
+
+/* =========================================================
+   1. GLOBAL USER PAGE SETTINGS
+   ========================================================= */
 
 .user-dashboard-page,
 .user-trips-page,
@@ -15,6 +22,7 @@
   width: 100%;
   min-width: 0;
   box-sizing: border-box;
+  overflow-wrap: anywhere;
 }
 
 .user-dashboard-page *,
@@ -22,22 +30,20 @@
 .user-bookings-page *,
 .user-payments-page *,
 .user-profile-page *,
-.user-trip-details-page *{
+.user-trip-details-page * {
   box-sizing: border-box;
 }
 
-/* Prevent content from pushing the page outside the screen */
-.user-dashboard-page,
-.user-trips-page,
-.user-bookings-page,
-.user-payments-page,
-.user-profile-page,
-.user-trip-details-page {
-  overflow-wrap: anywhere;
+.user-trips-page img,
+.user-bookings-page img,
+.user-trip-details-page img,
+.user-profile-page img {
+  max-width: 100%;
 }
 
+
 /* =========================================================
-   1. USER DASHBOARD
+   2. DASHBOARD
    ========================================================= */
 
 .user-dashboard-page {
@@ -55,7 +61,7 @@
 }
 
 .user-dashboard-page h1 {
-  line-height: 1.15;
+  line-height: 1.2;
   overflow-wrap: break-word;
 }
 
@@ -66,11 +72,11 @@
 .user-dashboard-page button {
   min-height: 48px;
   cursor: pointer;
-  transition: transform 0.2s ease, background-color 0.2s ease;
 }
 
+
 /* =========================================================
-   2. AVAILABLE TRIPS
+   3. AVAILABLE TRIPS - DESKTOP DEFAULT
    ========================================================= */
 
 .user-trips-page {
@@ -79,8 +85,10 @@
   padding: 24px;
 }
 
-.user-trips-page h1 {
+.user-trips-page > h1 {
+  font-size: 1.8rem;
   line-height: 1.3;
+  margin-bottom: 24px;
 }
 
 .trips-filters {
@@ -89,37 +97,120 @@
   align-items: end;
   gap: 12px;
   width: 100%;
+  margin-bottom: 24px;
 }
 
 .trips-filters input {
   min-width: 0;
-  min-height: 42px;
   max-width: 100%;
+  min-height: 44px;
+  padding: 10px 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 8px;
+  background: white;
 }
 
 .trips-filters button {
-  min-height: 42px;
+  min-height: 44px;
+  padding: 10px 18px;
+  border-radius: 8px;
   white-space: nowrap;
 }
 
-.user-trips-page .grid {
+.user-trips-page > .grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   align-items: stretch;
+  gap: 24px;
 }
 
-.user-trips-page .grid > div {
+/* Individual trip card */
+
+.user-trips-page > .grid > div {
+  display: flex;
+  flex-direction: column;
   min-width: 0;
+  height: 100%;
+  background: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.07);
+  transition: box-shadow 0.2s ease, transform 0.2s ease;
 }
 
-.user-trips-page img {
-  max-width: 100%;
+.user-trips-page > .grid > div:hover {
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.12);
 }
 
-.user-trips-page button {
+/* Trip image */
+
+.user-trips-page > .grid > div > .relative {
+  position: relative;
+  width: 100%;
+  height: 220px;
+  min-height: 220px;
+  overflow: hidden;
+  background: #f3f4f6;
+}
+
+.user-trips-page > .grid > div > .relative img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.user-trips-page > .grid > div > .relative button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
   cursor: pointer;
 }
 
+/* Trip information */
+
+.user-trips-page > .grid > div > .p-4 {
+  display: flex;
+  flex: 1;
+  flex-direction: column;
+  padding: 18px;
+}
+
+.user-trips-page > .grid > div h2 {
+  font-size: 1.15rem;
+  line-height: 1.4;
+  white-space: normal;
+  overflow-wrap: anywhere;
+  margin-bottom: 8px;
+}
+
+.user-trips-page > .grid > div p {
+  line-height: 1.6;
+  margin-top: 5px;
+}
+
+.user-trips-page > .grid > div p.font-bold {
+  font-size: 1.25rem;
+  color: #111827;
+}
+
+.user-trips-page > .grid > div > .p-4 button {
+  width: 100%;
+  min-height: 46px;
+  margin-top: auto;
+  padding: 12px 16px;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+
 /* =========================================================
-   3. MY BOOKINGS
+   4. MY BOOKINGS - DESKTOP DEFAULT
    ========================================================= */
 
 .user-bookings-page {
@@ -128,21 +219,42 @@
   padding: 24px;
 }
 
+.user-bookings-page > h1 {
+  font-size: 1.8rem;
+  margin-bottom: 24px;
+}
+
+.user-bookings-page > .space-y-4 {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* Main booking card */
+
 .booking-card {
   display: flex;
   flex-direction: row;
+  position: relative;
   width: 100%;
   min-width: 0;
   min-height: 230px;
-  position: relative;
-  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  background: white;
+  overflow: hidden;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.06);
 }
+
+/* Booking image */
 
 .booking-card-image {
   flex: 0 0 220px;
   width: 220px;
   min-width: 0;
   min-height: 220px;
+  position: relative;
+  background: #f3f4f6;
 }
 
 .booking-card-image img {
@@ -150,14 +262,29 @@
   width: 100%;
   height: 100%;
   max-height: 260px;
-  object-fit: contain;
+  object-fit: cover;
 }
+
+/* Booking details */
 
 .booking-card-details {
   flex: 1;
   min-width: 0;
-  padding: 20px;
+  padding: 22px;
 }
+
+.booking-card-details h2 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  overflow-wrap: anywhere;
+}
+
+.booking-card-details p {
+  line-height: 1.7;
+  overflow-wrap: anywhere;
+}
+
+/* Booking actions */
 
 .booking-card-actions {
   display: flex;
@@ -167,15 +294,26 @@
 }
 
 .booking-card button {
-  min-height: 38px;
+  min-height: 42px;
+  padding: 9px 16px;
+  border-radius: 8px;
   cursor: pointer;
+  font-weight: 500;
 }
 
+/* PDF button */
+
+.booking-card > button.absolute {
+  z-index: 2;
+}
+
+
 /* =========================================================
-   4. MY PAYMENTS
+   5. PAYMENTS
    ========================================================= */
 
 .user-payments-page {
+  width: 100%;
   padding: 24px;
 }
 
@@ -206,11 +344,13 @@
 }
 
 .user-payments-page button {
+  min-height: 40px;
   cursor: pointer;
 }
 
+
 /* =========================================================
-   5. MY PROFILE
+   6. PROFILE
    ========================================================= */
 
 .user-profile-page {
@@ -218,14 +358,14 @@
   max-width: 650px;
   margin: 0 auto;
   padding: 28px;
-  border-radius: 12px;
+  border-radius: 14px;
 }
 
 .user-profile-page form {
   width: 100%;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
 }
 
 .user-profile-page input,
@@ -234,13 +374,14 @@
   width: 100%;
   min-width: 0;
   max-width: 100%;
-  min-height: 44px;
-  padding: 10px 12px;
-  border-radius: 8px;
+  min-height: 46px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
 }
 
 .user-profile-page input[type="file"] {
-  padding: 8px;
+  padding: 10px;
   font-size: 14px;
 }
 
@@ -250,585 +391,903 @@
 }
 
 .user-profile-page button {
-  min-height: 44px;
+  min-height: 46px;
+  padding: 12px 18px;
   cursor: pointer;
-  border-radius: 8px;
+  border-radius: 9px;
 }
 
 
-
 /* =========================================================
-   6. TRIP DETAILS PAGE
+   7. TRIP DETAILS
    ========================================================= */
 
 .user-trip-details-page {
   width: 100%;
-  max-width: 768px;
+  max-width: 900px;
   margin: 0 auto;
-  padding: 24px;
-  min-width: 0;
+  padding: 28px;
   overflow: hidden;
-  border-radius: 12px;
+  border-radius: 14px;
+  background: white;
+  box-shadow: 0 3px 14px rgba(0, 0, 0, 0.07);
 }
 
 .trip-details-title {
+  font-size: 2rem;
   line-height: 1.3;
   overflow-wrap: anywhere;
 }
 
 .trip-details-description {
-  line-height: 1.6;
+  font-size: 1rem;
+  line-height: 1.8;
+  color: #4b5563;
   overflow-wrap: anywhere;
 }
 
 .trip-details-image {
+  position: relative;
   width: 100%;
   min-width: 0;
-  min-height: 260px;
+  min-height: 320px;
+  overflow: hidden;
+  border-radius: 12px;
+  background: #f3f4f6;
 }
 
 .trip-details-image img {
   display: block;
   width: 100%;
   max-width: 100%;
-  height: 360px;
+  height: 420px;
   object-fit: contain;
+  background: white;
 }
 
 .trip-details-image button {
-  min-width: 40px;
-  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
   cursor: pointer;
 }
 
 .trip-details-info {
-  line-height: 1.7;
+  font-size: 1rem;
+  line-height: 1.8;
+}
+
+.trip-details-info p:last-child {
+  font-size: 1.5rem;
+  font-weight: 700;
 }
 
 .trip-details-select {
+  display: block;
   width: 100%;
   min-width: 0;
-  min-height: 44px;
+  min-height: 48px;
+  padding: 12px;
+  border: 1px solid #d1d5db;
+  border-radius: 9px;
+  background: white;
 }
 
 .trip-details-actions {
   display: flex;
   flex-wrap: wrap;
-  gap: 10px;
+  gap: 12px;
 }
 
 .trip-details-actions button {
-  min-height: 44px;
+  flex: 1 1 180px;
+  min-height: 48px;
+  padding: 12px 20px;
+  border-radius: 9px;
+  font-size: 15px;
+  font-weight: 600;
   cursor: pointer;
-  transition: background-color 0.2s ease;
-}
-
-/* ---------- TABLET: 768px - 1024px ---------- */
-
-@media (min-width: 768px) and (max-width: 1024px) {
-
-  .user-trip-details-page {
-    max-width: 720px;
-    padding: 22px;
-  }
-
-  .trip-details-image img {
-    height: 320px;
-  }
-
-  .trip-details-title {
-    font-size: 1.8rem;
-  }
-}
-
-/* ---------- MOBILE: 481px - 767px ---------- */
-
-@media (min-width: 481px) and (max-width: 767px) {
-
-  .user-trip-details-page {
-    width: 100%;
-    max-width: 100%;
-    padding: 20px;
-    border-radius: 10px;
-  }
-
-  .trip-details-title {
-    font-size: 1.7rem;
-  }
-
-  .trip-details-description {
-    font-size: 14px;
-  }
-
-  .trip-details-image {
-    min-height: 220px;
-    margin-bottom: 20px;
-  }
-
-  .trip-details-image img {
-    height: 280px;
-  }
-
-  .trip-details-info {
-    font-size: 14px;
-  }
-
-  .trip-details-actions {
-    gap: 10px;
-  }
-
-  .trip-details-actions button {
-    flex: 1 1 auto;
-    min-height: 46px;
-  }
-}
-
-/* ---------- SMALL MOBILE: 480px AND BELOW ---------- */
-
-@media (max-width: 480px) {
-
-  .user-trip-details-page {
-    width: 100%;
-    max-width: 100%;
-    padding: 14px;
-    border-radius: 10px;
-    margin: 0 auto;
-  }
-
-  .trip-details-title {
-    font-size: 1.45rem;
-    line-height: 1.3;
-    margin-bottom: 10px;
-  }
-
-  .trip-details-description {
-    font-size: 14px;
-    line-height: 1.5;
-    margin-bottom: 16px;
-  }
-
-  .trip-details-image {
-    width: 100%;
-    min-height: 190px;
-    margin-bottom: 18px;
-    border-radius: 8px;
-  }
-
-  .trip-details-image img {
-    width: 100%;
-    height: 220px;
-    max-width: 100%;
-    object-fit: contain;
-  }
-
-  .trip-details-image button {
-    min-width: 36px;
-    min-height: 40px;
-    padding: 6px 10px;
-    font-size: 18px;
-  }
-
-  .trip-details-info {
-    font-size: 14px;
-    line-height: 1.7;
-    margin-bottom: 16px;
-  }
-
-  .trip-details-info p:last-child {
-    font-size: 17px;
-  }
-
-  .trip-details-select {
-    width: 100%;
-    min-height: 46px;
-    font-size: 14px;
-    margin-bottom: 16px;
-  }
-
-  .trip-details-actions {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    gap: 10px;
-  }
-
-  .trip-details-actions button {
-    width: 100%;
-    min-height: 46px;
-    padding: 12px 16px;
-    font-size: 14px;
-  }
-}
-
-/* ---------- ACCESSIBILITY ---------- */
-
-.user-trip-details-page button:focus-visible,
-.user-trip-details-page select:focus-visible {
-  outline: 3px solid #60a5fa;
-  outline-offset: 2px;
-}
-
-@media (hover: none) {
-  .user-trip-details-page button:hover {
-    transform: none;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .user-trip-details-page * {
-    scroll-behavior: auto !important;
-    animation-duration: 0.01ms !important;
-    transition-duration: 0.01ms !important;
-  }
 }
 
 
 /* =========================================================
-   TABLET RESPONSIVENESS
+   8. TABLET RESPONSIVENESS
    768px - 1024px
    ========================================================= */
 
 @media (min-width: 768px) and (max-width: 1024px) {
 
   .user-dashboard-page > div {
-    padding: 32px 20px;
-  }
-
-  .user-dashboard-page h1 {
-    font-size: clamp(2.5rem, 5vw, 3.5rem);
-  }
-
-  .user-trips-page {
-    padding: 20px;
-  }
-
-  .user-trips-page .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 20px;
-  }
-
-  .user-bookings-page {
-    padding: 20px;
-  }
-
-  .booking-card-image {
-    flex-basis: 180px;
-    width: 180px;
-  }
-
-  .booking-card-details {
-    padding: 16px;
-  }
-
-  .user-payments-page {
-    padding: 20px;
-  }
-
-  .user-profile-page {
-    max-width: 600px;
-  }
-}
-
-/* =========================================================
-   MOBILE RESPONSIVENESS
-   481px - 767px
-   ========================================================= */
-
-@media (min-width: 481px) and (max-width: 767px) {
-
-  .user-dashboard-page {
-    min-height: 65vh;
-    min-height: 65dvh;
-  }
-
-  .user-dashboard-page > div {
-    min-height: 65vh;
-    min-height: 65dvh;
-    padding: 30px 20px;
-  }
-
-  .user-dashboard-page h1 {
-    font-size: clamp(2rem, 7vw, 2.8rem);
-  }
-
-  .user-dashboard-page p {
-    font-size: 1rem;
-  }
-
-  .user-dashboard-page button {
-    padding: 14px 28px;
-    font-size: 1rem;
-  }
-
-  .user-trips-page,
-  .user-bookings-page,
-  .user-payments-page {
-    padding: 16px;
-  }
-
-  .user-trips-page .grid {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 16px;
-  }
-
-  .trips-filters {
-    display: grid;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-
-  .trips-filters input,
-  .trips-filters button {
-    width: 100%;
-  }
-
-  .booking-card {
-    flex-direction: column;
-  }
-
-  .booking-card-image {
-    flex: none;
-    width: 100%;
-    height: 230px;
-    min-height: 0;
-    padding: 12px;
-  }
-
-  .booking-card-image img {
-    height: 100%;
-    max-height: 210px;
-  }
-
-  .booking-card-details {
-    padding: 16px;
-  }
-
-  .booking-card-actions {
-    margin-top: 12px;
-  }
-
-  .user-profile-page {
-    padding: 22px;
-  }
-}
-
-/* =========================================================
-   SMALL MOBILE RESPONSIVENESS
-   480px and below
-   ========================================================= */
-
-@media (max-width: 480px) {
-
-  /* Dashboard */
-
-  .user-dashboard-page {
-    min-height: 65vh;
-    min-height: 65dvh;
-    border-radius: 10px;
-  }
-
-  .user-dashboard-page > div {
-    min-height: 65vh;
-    min-height: 65dvh;
-    padding: 24px 16px;
-  }
-
-  .user-dashboard-page h1 {
-    font-size: clamp(1.8rem, 8vw, 2.4rem);
-    line-height: 1.2;
-    margin-bottom: 16px;
-  }
-
-  .user-dashboard-page p {
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 20px;
-  }
-
-  .user-dashboard-page button {
-    width: 100%;
-    max-width: 240px;
-    min-height: 48px;
-    padding: 12px 20px;
-    font-size: 1rem;
+    padding: 36px 24px;
   }
 
   /* Trips */
 
   .user-trips-page {
-    padding: 12px;
+    padding: 20px;
   }
 
-  .user-trips-page h1 {
-    font-size: 1.4rem;
-    margin-bottom: 16px;
+  .user-trips-page > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+  }
+
+  .user-trips-page > .grid > div > .relative {
+    height: 230px;
   }
 
   .trips-filters {
-    display: flex;
-    flex-direction: column;
-    align-items: stretch;
-    gap: 10px;
-    margin-bottom: 20px;
-  }
-
-  .trips-filters input,
-  .trips-filters button {
-    width: 100%;
-    min-height: 44px;
-    font-size: 14px;
-  }
-
-  .user-trips-page .grid {
-    grid-template-columns: minmax(0, 1fr);
-    gap: 16px;
-  }
-
-  .user-trips-page .grid > div {
-    width: 100%;
-  }
-
-  .user-trips-page img {
-    width: 100%;
-    object-fit: cover;
+    gap: 12px;
   }
 
   /* Bookings */
 
   .user-bookings-page {
-    padding: 12px;
-  }
-
-  .user-bookings-page h1 {
-    font-size: 1.4rem;
-  }
-
-  .booking-card {
-    flex-direction: column;
-    min-height: 0;
-    border-radius: 10px;
+    padding: 20px;
   }
 
   .booking-card-image {
-    flex: none;
-    width: 100%;
-    height: 200px;
-    min-height: 0;
-    padding: 10px;
-  }
-
-  .booking-card-image img {
-    width: 100%;
-    height: 100%;
-    max-height: 180px;
-    object-fit: contain;
+    flex-basis: 190px;
+    width: 190px;
   }
 
   .booking-card-details {
-    width: 100%;
-    padding: 14px;
-  }
-
-  .booking-card-details h2,
-  .booking-card-details h3 {
-    overflow-wrap: anywhere;
-  }
-
-  .booking-card-actions {
-    flex-direction: column;
-    align-items: stretch;
-    width: 100%;
-    gap: 8px;
-  }
-
-  .booking-card-actions button {
-    width: 100%;
-    min-height: 42px;
+    padding: 18px;
   }
 
   /* Payments */
 
   .user-payments-page {
-    padding: 12px;
-  }
-
-  .user-payments-page h1 {
-    font-size: 1.4rem;
-  }
-
-  .payments-table-wrapper {
-    border-radius: 8px;
-  }
-
-  .user-payments-page table {
-    min-width: 600px;
-  }
-
-  .user-payments-page th,
-  .user-payments-page td {
-    padding: 10px 12px;
-    font-size: 13px;
+    padding: 20px;
   }
 
   /* Profile */
 
   .user-profile-page {
+    max-width: 620px;
+  }
+
+  /* Trip details */
+
+  .user-trip-details-page {
+    max-width: 760px;
+    padding: 24px;
+  }
+
+  .trip-details-image img {
+    height: 350px;
+  }
+}
+
+
+/* =========================================================
+   9. MOBILE RESPONSIVENESS
+   481px - 767px
+   ========================================================= */
+
+@media (min-width: 481px) and (max-width: 767px) {
+
+  /* Dashboard */
+
+  .user-dashboard-page {
+    min-height: 60vh;
+    min-height: 60dvh;
+  }
+
+  .user-dashboard-page > div {
+    min-height: 60vh;
+    min-height: 60dvh;
+    padding: 32px 24px;
+  }
+
+  .user-dashboard-page h1 {
+    font-size: 2.5rem;
+  }
+
+  /* Trips */
+
+  .user-trips-page {
+    padding: 18px;
+  }
+
+  .user-trips-page > .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+  }
+
+  .user-trips-page > .grid > div > .relative {
+    height: 210px;
+    min-height: 210px;
+  }
+
+  .user-trips-page > .grid > div > .p-4 {
+    padding: 15px;
+  }
+
+  .user-trips-page > .grid > div h2 {
+    font-size: 1.05rem;
+  }
+
+  .trips-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    align-items: stretch;
+  }
+
+  .trips-filters input,
+  .trips-filters button {
     width: 100%;
-    padding: 18px 14px;
+    min-height: 48px;
+  }
+
+  .trips-filters input[name="search"] {
+    grid-column: 1 / -1;
+  }
+
+  /* Bookings */
+
+  .user-bookings-page {
+    padding: 18px;
+  }
+
+  .booking-card {
+    flex-direction: column;
+  }
+
+  .booking-card-image {
+    flex: none;
+    width: 100%;
+    height: 260px;
+    min-height: 260px;
+    padding: 10px;
+  }
+
+  .booking-card-image img {
+    max-height: 240px;
+    border-radius: 9px;
+  }
+
+  .booking-card-details {
+    padding: 18px;
+  }
+
+  .booking-card-actions {
+    margin-top: 14px;
+  }
+
+  /* Profile */
+
+  .user-profile-page {
+    padding: 24px;
+  }
+
+  /* Trip details */
+
+  .user-trip-details-page {
+    max-width: 100%;
+    padding: 22px;
+  }
+
+  .trip-details-image {
+    min-height: 280px;
+  }
+
+  .trip-details-image img {
+    height: 300px;
+  }
+}
+
+
+/* =========================================================
+   10. SMALL MOBILE RESPONSIVENESS
+   480px AND BELOW
+
+   Mobile app-style layouts
+   ========================================================= */
+
+@media (max-width: 480px) {
+
+  /* -------------------------
+     COMMON PAGE SPACING
+  ------------------------- */
+
+  .user-dashboard-page,
+  .user-trips-page,
+  .user-bookings-page,
+  .user-payments-page,
+  .user-profile-page,
+  .user-trip-details-page {
+    width: 100%;
+    min-width: 0;
+  }
+
+
+  /* -------------------------
+     DASHBOARD
+  ------------------------- */
+
+  .user-dashboard-page {
+    min-height: 58vh;
+    min-height: 58dvh;
+    border-radius: 12px;
+  }
+
+  .user-dashboard-page > div {
+    min-height: 58vh;
+    min-height: 58dvh;
+    padding: 30px 18px;
+  }
+
+  .user-dashboard-page h1 {
+    font-size: clamp(2rem, 8vw, 2.5rem);
+    line-height: 1.2;
+    margin-bottom: 18px;
+  }
+
+  .user-dashboard-page p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin-bottom: 22px;
+  }
+
+  .user-dashboard-page button {
+    width: 100%;
+    max-width: 280px;
+    min-height: 50px;
+    font-size: 16px;
+  }
+
+
+  /* -------------------------
+     AVAILABLE TRIPS
+  ------------------------- */
+
+  .user-trips-page {
+    max-width: 100%;
+    padding: 14px 12px 24px;
+  }
+
+  .user-trips-page > h1 {
+    font-size: 1.65rem;
+    line-height: 1.3;
+    margin-bottom: 20px;
+  }
+
+  /* Search and price filters */
+
+  .trips-filters {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
+    align-items: stretch;
+    margin-bottom: 22px;
+  }
+
+  .trips-filters input {
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    min-height: 48px;
+    padding: 12px;
+    font-size: 15px;
+    border: 1px solid #d1d5db;
     border-radius: 10px;
+    background: white;
+  }
+
+  .trips-filters input[name="search"] {
+    grid-column: 1 / -1;
+  }
+
+  .trips-filters button {
+    grid-column: 1 / -1;
+    width: 100%;
+    min-height: 48px;
+    border-radius: 10px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  /* One full-width trip card per row */
+
+  .user-trips-page > .grid {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr);
+    gap: 20px;
+    width: 100%;
+  }
+
+  .user-trips-page > .grid > div {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Large destination photo */
+
+  .user-trips-page > .grid > div > .relative {
+    position: relative;
+    width: 100%;
+    height: 235px;
+    min-height: 235px;
+    overflow: hidden;
+    background: #f3f4f6;
+  }
+
+  .user-trips-page > .grid > div > .relative img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  /* Carousel buttons */
+
+  .user-trips-page > .grid > div > .relative button {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 24px;
+    background: rgba(0, 0, 0, 0.55);
+  }
+
+  /* Card information */
+
+  .user-trips-page > .grid > div > .p-4 {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding: 18px 16px 16px;
+  }
+
+  .user-trips-page > .grid > div h2 {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    font-weight: 700;
+    margin-bottom: 8px;
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+
+  .user-trips-page > .grid > div p {
+    font-size: 15px;
+    line-height: 1.7;
+    color: #4b5563;
+    margin-top: 5px;
+  }
+
+  .user-trips-page > .grid > div p.font-bold {
+    font-size: 1.45rem;
+    font-weight: 800;
+    color: #111827;
+    margin-top: 12px;
+    margin-bottom: 16px;
+  }
+
+  /* Prominent View Details action */
+
+  .user-trips-page > .grid > div > .p-4 button {
+    display: block;
+    width: 100%;
+    min-height: 50px;
+    margin-top: auto;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+
+  /* -------------------------
+     MY BOOKINGS
+  ------------------------- */
+
+  .user-bookings-page {
+    max-width: 100%;
+    padding: 14px 12px 24px;
+  }
+
+  .user-bookings-page > h1 {
+    font-size: 1.65rem;
+    margin-bottom: 20px;
+  }
+
+  .user-bookings-page > .space-y-4 {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  /* Booking card */
+
+  .booking-card {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    min-height: 0;
+    border-radius: 14px;
+    border: 1px solid #e5e7eb;
+    background: white;
+    overflow: hidden;
+    box-shadow: 0 3px 14px rgba(0, 0, 0, 0.08);
+  }
+
+  /* Booking image */
+
+  .booking-card-image {
+    position: relative;
+    flex: none;
+    width: 100%;
+    height: 225px;
+    min-height: 225px;
+    padding: 0;
+    background: #f3f4f6;
+  }
+
+  .booking-card-image img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: cover;
+    border-radius: 0;
+  }
+
+  .booking-card-image button {
+    width: 40px;
+    height: 40px;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 21px;
+  }
+
+  /* Booking PDF button */
+
+  .booking-card > button.absolute {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    width: auto;
+    min-height: 40px;
+    padding: 9px 13px;
+    border-radius: 8px;
+    font-size: 13px;
+    background: #2563eb;
+  }
+
+  /* Booking information */
+
+  .booking-card-details {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    min-width: 0;
+    padding: 18px 16px;
+    gap: 16px;
+  }
+
+  .booking-card-details h2 {
+    font-size: 1.2rem;
+    line-height: 1.4;
+    font-weight: 700;
+    white-space: normal;
+    overflow-wrap: anywhere;
+    margin-bottom: 8px;
+  }
+
+  .booking-card-details p {
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-wrap: anywhere;
+    margin-top: 5px;
+  }
+
+  .booking-card-details .text-sm {
+    font-size: 15px;
+  }
+
+  /* Booking status and payment information */
+
+  .booking-card-details .mt-3 {
+    margin-top: 10px;
+  }
+
+  .booking-card-details .mt-3 > div:first-child {
+    padding: 14px;
+    border-radius: 10px;
+    background: #f9fafb;
+    line-height: 1.8;
+  }
+
+  /* Booking actions */
+
+  .booking-card-actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    width: 100%;
+    gap: 10px;
+    margin-top: 14px;
+  }
+
+  .booking-card-actions button {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border-radius: 9px;
+    font-size: 15px;
+    font-weight: 600;
+  }
+
+  .booking-card-actions span {
+    padding: 8px 0;
+    font-size: 15px;
+  }
+
+
+  /* -------------------------
+     PAYMENTS
+  ------------------------- */
+
+  .user-payments-page {
+    width: 100%;
+    padding: 14px 12px 24px;
+  }
+
+  .user-payments-page h1 {
+    font-size: 1.65rem;
+    margin-bottom: 18px;
+  }
+
+  .payments-table-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    border-radius: 10px;
+    background: white;
+  }
+
+  .user-payments-page table {
+    width: 100%;
+    min-width: 620px;
+  }
+
+  .user-payments-page th,
+  .user-payments-page td {
+    padding: 13px 14px;
+    font-size: 14px;
+  }
+
+  .user-payments-page button {
+    min-height: 44px;
+    padding: 9px 13px;
+  }
+
+
+  /* -------------------------
+     PROFILE
+  ------------------------- */
+
+  .user-profile-page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 20px 16px;
+    border-radius: 13px;
+    background: white;
   }
 
   .user-profile-page h1,
   .user-profile-page h2 {
-    font-size: 1.35rem;
+    font-size: 1.5rem;
+    line-height: 1.4;
+    margin-bottom: 16px;
   }
 
   .user-profile-page form {
-    gap: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
   }
 
   .user-profile-page input,
   .user-profile-page select,
   .user-profile-page textarea {
-    font-size: 14px;
-    min-height: 44px;
+    width: 100%;
+    min-height: 48px;
+    padding: 12px;
+    font-size: 15px;
+    border-radius: 9px;
+  }
+
+  .user-profile-page textarea {
+    min-height: 110px;
+  }
+
+  .user-profile-page input[type="file"] {
+    min-height: 48px;
+    font-size: 13px;
+  }
+
+  .user-profile-page img {
+    max-width: 100%;
+    border-radius: 12px;
   }
 
   .user-profile-page button {
     width: 100%;
-    min-height: 46px;
+    min-height: 49px;
+    padding: 12px 16px;
+    font-size: 15px;
+    font-weight: 600;
   }
+
+
+  /* -------------------------
+     TRIP DETAILS
+  ------------------------- */
+
+  .user-trip-details-page {
+    width: 100%;
+    max-width: 100%;
+    margin: 0;
+    padding: 18px 14px;
+    border-radius: 13px;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+  }
+
+  .trip-details-title {
+    font-size: 1.65rem;
+    line-height: 1.35;
+    font-weight: 750;
+    margin-bottom: 12px;
+  }
+
+  .trip-details-description {
+    font-size: 15px;
+    line-height: 1.75;
+    color: #4b5563;
+    margin-bottom: 20px;
+  }
+
+  /* Large trip image */
+
+  .trip-details-image {
+    width: 100%;
+    min-height: 230px;
+    margin-bottom: 22px;
+    border-radius: 12px;
+    background: #f3f4f6;
+  }
+
+  .trip-details-image img {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    height: 240px;
+    object-fit: cover;
+    background: #f3f4f6;
+  }
+
+  .trip-details-image button {
+    width: 42px;
+    height: 42px;
+    min-width: 42px;
+    min-height: 42px;
+    padding: 0;
+    border-radius: 50%;
+    font-size: 22px;
+  }
+
+  /* Trip information */
+
+  .trip-details-info {
+    margin-bottom: 20px;
+    font-size: 16px;
+    line-height: 1.8;
+  }
+
+  .trip-details-info p:last-child {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: #111827;
+    margin-top: 8px;
+  }
+
+  /* Trip type */
+
+  .trip-details-select {
+    width: 100%;
+    min-height: 50px;
+    padding: 12px;
+    margin-bottom: 18px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    font-size: 15px;
+    background: white;
+  }
+
+  /* Booking and itinerary buttons */
+
+  .trip-details-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+  }
+
+  .trip-details-actions button {
+    width: 100%;
+    min-height: 50px;
+    flex: none;
+    padding: 13px 16px;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
 }
+
 
 /* =========================================================
-   ACCESSIBILITY AND TOUCH EXPERIENCE
+   11. ACCESSIBILITY AND TOUCH EXPERIENCE
    ========================================================= */
 
-/* Prevent hover effects from being forced on touch devices */
-@media (hover: none) {
-  .user-dashboard-page button:hover {
-    transform: none;
-  }
+.user-dashboard-page button,
+.user-trips-page button,
+.user-bookings-page button,
+.user-payments-page button,
+.user-profile-page button,
+.user-trip-details-page button {
+  -webkit-tap-highlight-color: transparent;
 }
 
-/* Visible keyboard focus */
 .user-dashboard-page button:focus-visible,
 .user-trips-page button:focus-visible,
 .user-bookings-page button:focus-visible,
 .user-payments-page button:focus-visible,
 .user-profile-page button:focus-visible,
 .user-profile-page input:focus-visible,
-.user-trips-page input:focus-visible {
+.user-trips-page input:focus-visible,
+.user-trip-details-page button:focus-visible,
+.user-trip-details-page select:focus-visible {
   outline: 3px solid #60a5fa;
-  outline-offset: 2px;
+  outline-offset: 3px;
 }
 
-/* Respect users who prefer reduced motion */
+@media (hover: none) {
+  .user-trips-page > .grid > div:hover {
+    transform: none;
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .user-dashboard-page *,
   .user-trips-page *,
   .user-bookings-page *,
   .user-payments-page *,
-  .user-profile-page * {
+  .user-profile-page *,
+  .user-trip-details-page * {
     scroll-behavior: auto !important;
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
