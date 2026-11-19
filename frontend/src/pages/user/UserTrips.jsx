@@ -18,16 +18,24 @@ export default function UserTrips() {
   const fetchTrips = async () => {
     try {
       const res = await api.get("/trips");
+
       if (Array.isArray(res.data)) {
         const tripsWithImages = res.data.map((trip) => ({
           ...trip,
           images: Array.isArray(trip.images)
-            ? trip.images.map((img) =>
-                img.startsWith("http") ? img : `http://localhost:5000/uploads/${img}`
-              )
+            ? trip.images.map((img) => {
+                if (!img) return "";
+
+                // Preserve Cloudinary and other absolute URLs
+                if (img.startsWith("http")) return img;
+
+                // Convert relative paths to Render backend URLs
+                return `https://trip-planner-49ku.onrender.com/uploads/${img.replace(/^\/+/, "")}`;
+              })
             : [],
           imageIndex: 0, // for carousel
         }));
+
         const reversedTrips = tripsWithImages.slice().reverse();
         setTrips(reversedTrips);
         setAllTrips(reversedTrips);
@@ -190,11 +198,13 @@ export default function UserTrips() {
                   ? `${trip.title} - ${trip.destination_name ?? "Unknown"}`
                   : trip.destination_name ?? "Untitled"}
               </h2>
+
               {trip.destination_name && (
                 <p className="text-sm text-gray-600">
                   Destination: {trip.destination_name}
                 </p>
               )}
+
               <p>Duration: {trip.duration ?? "-"} days</p>
               <p className="font-bold mt-1">₹{trip.price ?? "-"}</p>
 

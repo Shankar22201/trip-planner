@@ -26,7 +26,11 @@ export default function Profile() {
       });
 
       setPreview(
-        user.image ? `http://localhost:5000/${user.image}` : ""
+        user.image
+          ? user.image.startsWith("http")
+            ? user.image
+            : `https://trip-planner-49ku.onrender.com/${user.image.replace(/^\/+/, "")}`
+          : ""
       );
     }
   }, [user]);

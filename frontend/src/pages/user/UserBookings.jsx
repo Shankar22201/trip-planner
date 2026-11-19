@@ -16,11 +16,15 @@ export default function UserBookings() {
         const bookingsWithFullImages = res.data.map((b) => ({
           ...b,
           images: Array.isArray(b.images)
-            ? b.images.map((img) =>
-                img.startsWith("http")
-                  ? img
-                  : `http://localhost:5000/uploads/${img}`
-              )
+            ? b.images.map((img) => {
+              if (!img) return "";
+
+              // Preserve Cloudinary and other absolute URLs
+              if (img.startsWith("http")) return img;
+
+              // Convert legacy relative paths to Render backend URLs
+              return `https://trip-planner-49ku.onrender.com/uploads/${img.replace(/^\/+/, "")}`;
+            })
             : [],
         }));
         setBookings(bookingsWithFullImages);
@@ -81,14 +85,13 @@ export default function UserBookings() {
     doc.text(`Budget: ${booking.budget}`, 15, yOffset + 50); // No ₹ symbol
     doc.text(`Status: ${booking.status}`, 15, yOffset + 60);
     doc.text(
-      `Payment: ${
-        booking.payment_status === "SUCCESS"
-          ? "Paid"
-          : booking.payment_status === "PENDING"
+      `Payment: ${booking.payment_status === "SUCCESS"
+        ? "Paid"
+        : booking.payment_status === "PENDING"
           ? "Pending"
           : booking.payment_method === "CASH"
-          ? "Pay at Admin"
-          : "Not Paid"
+            ? "Pay at Admin"
+            : "Not Paid"
       }`,
       15,
       yOffset + 70
@@ -137,7 +140,7 @@ function BookingCard({ booking, navigate, statusColor, cancelBooking, downloadBo
 
   return (
     <div className="flex flex-col custom:flex-row border rounded-lg shadow-sm bg-white overflow-hidden min-h-24rem custom:min-h-[16rem] relative">
-      
+
       {/* DOWNLOAD BUTTON */}
       <button
         onClick={() => downloadBookingPDF(booking)}
@@ -214,10 +217,10 @@ function BookingCard({ booking, navigate, statusColor, cancelBooking, downloadBo
                 {booking.payment_status === "SUCCESS"
                   ? "Paid"
                   : booking.payment_status === "PENDING"
-                  ? "Pending"
-                  : booking.payment_method === "CASH"
-                  ? "Pay at Admin"
-                  : "Not Paid"}
+                    ? "Pending"
+                    : booking.payment_method === "CASH"
+                      ? "Pay at Admin"
+                      : "Not Paid"}
               </b>
             </p>
           </div>

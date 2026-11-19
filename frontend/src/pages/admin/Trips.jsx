@@ -1,7 +1,4 @@
 
-
-
-
 import { useEffect, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import api from "../../utils/axios";
@@ -25,26 +22,32 @@ export default function Trips() {
   const [loading, setLoading] = useState(false);
 
   /* ================= FETCH ================= */
+
   const fetchTrips = async () => {
     if (!destinationId) return;
+
     try {
       const res = await api.get(`/admin/trips?destination=${destinationId}`);
+
       if (Array.isArray(res.data)) {
         const tripsWithFullImages = res.data.map((trip) => ({
           ...trip,
           images: Array.isArray(trip.images)
-            ? trip.images.map(
-                (img) =>
-                  `${img.startsWith("http") ? img : `http://localhost:5000/uploads/${img}`}`
-              )
+            ? trip.images.map((img) =>
+              img.startsWith("http")
+                ? img
+                : `https://trip-planner-49ku.onrender.com/uploads/${img}`
+            )
             : [],
         }));
+
         setTrips(tripsWithFullImages);
       }
     } catch (err) {
       console.error("Error fetching trips:", err);
     }
   };
+
 
   useEffect(() => {
     fetchTrips();
@@ -97,18 +100,18 @@ export default function Trips() {
 
 
   const deleteTrip = async (id) => {
-  if (!window.confirm("Delete this trip?")) return;
-  try {
-    const res = await api.delete(`/admin/trips/${id}`);
-    if (res.data.trip_id) {
-      // Remove the deleted trip from state
-      setTrips((prev) => prev.filter((t) => t.trip_id !== res.data.trip_id));
+    if (!window.confirm("Delete this trip?")) return;
+    try {
+      const res = await api.delete(`/admin/trips/${id}`);
+      if (res.data.trip_id) {
+        // Remove the deleted trip from state
+        setTrips((prev) => prev.filter((t) => t.trip_id !== res.data.trip_id));
+      }
+    } catch (err) {
+      console.error("Error deleting trip:", err.response?.data || err);
+      alert("Error deleting trip. Check console.");
     }
-  } catch (err) {
-    console.error("Error deleting trip:", err.response?.data || err);
-    alert("Error deleting trip. Check console.");
-  }
-};
+  };
 
 
   const editTrip = (tripId) => {
@@ -186,9 +189,8 @@ export default function Trips() {
         <button
           type="submit"
           disabled={loading}
-          className={`py-1 rounded text-white ${
-            loading ? "bg-gray-400" : "bg-green-600"
-          }`}
+          className={`py-1 rounded text-white ${loading ? "bg-gray-400" : "bg-green-600"
+            }`}
         >
           {loading ? "Adding..." : "Add Trip"}
         </button>

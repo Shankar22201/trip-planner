@@ -1,9 +1,4 @@
 
-
-
-
-
-
 import { useState, useEffect } from "react";
 import { useNavigate, useParams, useLocation } from "react-router-dom";
 import api from "../../utils/axios";
@@ -153,7 +148,11 @@ export default function TripEdit() {
             {existingImages.map((img, idx) => (
               <div key={idx} className="relative">
                 <img
-                  src={img.startsWith("http") ? img : `http://localhost:5000/uploads/${img}`}
+                  src={
+                    img.startsWith("http")
+                      ? img
+                      : `https://trip-planner-49ku.onrender.com/uploads/${img}`
+                  }
                   alt={`img-${idx}`}
                   className="w-16 h-16 object-cover rounded"
                 />
@@ -180,9 +179,8 @@ export default function TripEdit() {
         <button
           type="submit"
           disabled={loading}
-          className={`py-1 rounded text-white ${
-            loading ? "bg-gray-400" : "bg-yellow-500"
-          }`}
+          className={`py-1 rounded text-white ${loading ? "bg-gray-400" : "bg-yellow-500"
+            }`}
         >
           {loading ? "Updating..." : "Update Trip"}
         </button>
