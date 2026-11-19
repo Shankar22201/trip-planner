@@ -15,17 +15,23 @@ export default function TripDetails() {
       try {
         const res = await api.get(`/trips/${id}`);
         if (res.data) {
+
           // Convert relative image paths to full URLs
           const tripWithFullImages = {
             ...res.data,
             images: Array.isArray(res.data.images)
-              ? res.data.images.map((img) =>
-                  img.startsWith("http")
-                    ? img
-                    : `http://localhost:5000/uploads/${img}`
-                )
+              ? res.data.images.map((img) => {
+                if (!img) return "";
+
+                // Preserve Cloudinary and other absolute URLs
+                if (img.startsWith("http")) return img;
+
+                // Convert legacy relative paths to Render backend URLs
+                return `https://trip-planner-49ku.onrender.com/uploads/${img.replace(/^\/+/, "")}`;
+              })
               : [],
           };
+
           setTrip(tripWithFullImages);
         }
       } catch (err) {
