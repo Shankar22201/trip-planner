@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../utils/axios";
+import "./UserResponsive.css";
 
 export default function UserTrips() {
   const [trips, setTrips] = useState([]);
@@ -107,11 +108,11 @@ export default function UserTrips() {
   };
 
   return (
-    <div className="p-6 max-w-6xl mx-auto">
+    <div className="user-trips-page p-6 max-w-6xl mx-auto">
       <h1 className="text-2xl font-bold mb-4">Available Trips</h1>
 
       {/* ================= SEARCH & FILTER ================= */}
-      <div className="flex flex-wrap gap-2 mb-6 items-end">
+      <div className="trips-filters flex flex-wrap gap-2 mb-6 items-end">
         <input
           type="text"
           name="search"

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../utils/axios";
 import { useAuth } from "../../context/AuthContext";
+import "./UserResponsive.css";
 
 export default function Profile() {
   const { user, setUser } = useAuth();
@@ -84,7 +85,7 @@ export default function Profile() {
   };
 
   return (
-    <div className="max-w-xl mx-auto bg-white p-6 rounded shadow">
+    <div className="user-profile-page max-w-xl mx-auto bg-white p-6 rounded shadow">
       <h2 className="text-2xl font-bold mb-4">My Profile</h2>
 
       {msg && <p className="text-green-600 mb-2">{msg}</p>}

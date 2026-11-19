@@ -2,6 +2,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../utils/axios";
+import "./UserResponsive.css";
 
 export default function UserItinerary() {
   const { id } = useParams();

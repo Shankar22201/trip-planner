@@ -1,6 +1,7 @@
 import { Link, Outlet, useNavigate, useLocation } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import "./UserLayout.css";
 
 export default function UserLayout({ title, children }) {
   const { user, logout, loading } = useAuth();

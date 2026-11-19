@@ -1,13 +1,14 @@
 import { useNavigate } from "react-router-dom";
 import { useAuth } from "../../context/AuthContext";
 import heroImage from "../../assets/tower.jpg"; 
+import "./UserResponsive.css";
 
 export default function UserDashboard() {
   const { user } = useAuth();
   const navigate = useNavigate();
 
   return (
-    <div className="w-full h-full overflow-hidden">
+    <div className="user-dashboard-page w-full h-full overflow-hidden">
       {/* ================= HERO IMAGE + WELCOME ================= */}
       <div
         className="relative w-full h-full flex items-center justify-center"

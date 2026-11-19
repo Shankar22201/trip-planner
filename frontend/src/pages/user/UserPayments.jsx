@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "../../utils/axios";
 import jsPDF from "jspdf";
+import "./UserResponsive.css";
 
 export default function UserPayments() {
   const [payments, setPayments] = useState([]);

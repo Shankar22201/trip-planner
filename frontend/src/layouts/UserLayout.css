@@ -1,0 +1,97 @@
+
+
+/* =========================
+   TABLET RESPONSIVENESS
+========================= */
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .user-layout {
+    width: 100%;
+  }
+
+  .user-layout aside {
+    width: 220px;
+  }
+
+  .user-layout main {
+    padding: 20px;
+    min-width: 0;
+  }
+}
+
+/* =========================
+   MOBILE RESPONSIVENESS
+========================= */
+
+@media (max-width: 767px) {
+
+  .user-layout {
+    display: block;
+    width: 100%;
+    min-height: 100vh;
+  }
+
+  .user-layout > aside.hidden {
+    display: none;
+  }
+
+  .user-layout > div.flex-1 {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .user-layout main {
+    padding: 16px 12px 24px;
+    width: 100%;
+    min-width: 0;
+    overflow-x: auto;
+  }
+
+  .user-layout main h2 {
+    font-size: 21px;
+    margin-bottom: 16px;
+  }
+
+  /* Mobile top header */
+
+  .user-layout .md\:hidden {
+    padding: 14px 16px;
+  }
+
+  /* Mobile sidebar */
+
+  .user-layout .fixed.inset-0.z-50 {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+  }
+
+  .user-layout .fixed.inset-0.z-50 aside {
+    width: min(280px, 85vw);
+    overflow-y: auto;
+  }
+
+  /* Avoid horizontal overflow from page content */
+
+  .user-layout main > * {
+    max-width: 100%;
+  }
+
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 380px) {
+
+  .user-layout main {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+
+  .user-layout .md\:hidden {
+    padding: 12px;
+  }
+
+}
